@@ -5,8 +5,8 @@ on:
     branches:
       - main
     paths:
-      - 'CurrentEdits/db/**'
-      - 'CurrentEdits/**'
+      - 'CurrentEdits/dayzOffline.chernarusplus/**'
+      - 'CurrentEdits/dayzOffline.chernarusplus/db/**'
 
 jobs:
   update-and-release:
