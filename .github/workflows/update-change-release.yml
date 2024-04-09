@@ -5,8 +5,8 @@ on:
     branches:
       - main
     paths:
-      - '**.xml'
-      - '**.json'
+      - 'CurrentEdits/db/**'
+      - 'CurrentEdits/**'
 
 jobs:
   update-and-release:
