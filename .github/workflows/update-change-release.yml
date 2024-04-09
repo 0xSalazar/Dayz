@@ -1,0 +1,51 @@
+name: Update Changelog and Release
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - '**.xml'
+      - '**.json'
+
+jobs:
+  update-and-release:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: 0 # Fetches all history for all branches and tags
+
+      - name: Configure user
+        run: |
+          git config --global user.email "action@github.com"
+          git config --global user.name "GitHub Action"
+
+      - name: Install Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '14'
+
+      - name: Generate Changelog and Bump Version
+        id: changelog
+        uses: TriPSs/conventional-changelog-action@v5.2.1
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Commit Changelog and Version Bump
+        run: |
+          git add CHANGELOG.md
+          git commit -m "chore: release ${{ steps.changelog.outputs.tag }}"
+          git tag ${{ steps.changelog.outputs.tag }}
+          git push && git push --tags
+
+      - name: Create GitHub Release
+        id: create_release
+        uses: actions/create-release@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          tag_name: ${{ steps.changelog.outputs.tag }}
+          release_name: Release ${{ steps.changelog.outputs.tag }}
+          body: ${{ steps.changelog.outputs.changelog }}
