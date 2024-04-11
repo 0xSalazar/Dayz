@@ -36,7 +36,7 @@ jobs:
       - name: Commit Changelog and Version Bump
         run: |
           git add CHANGELOG.md
-          git commit -m "chore: release ${{ steps.changelog.outputs.tag }}"
+          git diff --staged --quiet || git commit -m "chore: release ${{ steps.changelog.outputs.tag }}"
           git tag ${{ steps.changelog.outputs.tag }}
           git push && git push --tags
 
