@@ -1,3 +1,12 @@
+# [0.3.0](https://github.com/0xSalazar/Dayz/compare/v0.2.0...v0.3.0) (2024-04-12)
+
+
+### Features
+
+* **messages.xml:** update M4A1 spawns to include Miltary zones ([4ab28ad](https://github.com/0xSalazar/Dayz/commit/4ab28ad512f286ccfe67854f086a4fc81b0c1134))
+
+
+
 # [0.2.0](https://github.com/0xSalazar/Dayz/compare/v0.1.0...v0.2.0) (2024-04-11)
 
 
